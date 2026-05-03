@@ -1,0 +1,10 @@
+npx create_react_app qrtrackapp
+npm install expo
+npx expo install expo-camera expo-barcode-scanner
+
+
+npm install -g expo-cli
+npx create-expo-app QRTrackApp
+cd QRTrackApp
+
+
