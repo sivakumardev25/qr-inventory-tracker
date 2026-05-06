@@ -5,6 +5,28 @@
 /.pnp
 .pnp.js
 
+build/
+.env
+.DS_Store
+.idea
+
+
+
+Android (Capacitor)
+-----------------------------
+
+# cache files
+android/.gradle/
+android/build/
+android/app/build
+
+# contains your SDK path (your PC only)
+android/local.properties
+
+# Android Studio settings
+android/.idea/
+
+
 # testing
 /coverage
 

@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+## 📦 QRTrack — QR Code Product Scanner (PWA + Android Ready)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+QRTrack is a mobile-first Progressive Web App (PWA) built with React that allows users to scan QR codes, track products, and generate a master inventory file — all in real time.
 
-## Available Scripts
+Designed for warehouse teams, inventory managers, and field operators, QRTrack works offline and can be installed on Android devices.
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+📷 QR Code Scanning
+Uses device camera (getUserMedia) + jsQR
+Real-time detection with scan overlay
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+🔍 Preview Before Save
+View scanned product details
+Adjust quantity before adding
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+📋 Master Inventory Tracking
+Maintain list of all scanned products
+Shows total scans, units, and unique products
 
-### `npm test`
+💾 Offline Storage
+Uses localStorage to persist data
+Works even without internet
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+📤 Export to CSV
+Download inventory data for reporting
 
-### `npm run build`
+📲 PWA Support
+Install on Android home screen
+Works in standalone app mode
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+🤖 Android App Ready
+Can be converted to APK using Capacitor
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🛠 Tech Stack
+Frontend: React (CRA)
+QR Scanning: jsQR (via CDN)
+State Management: React Hooks
+Storage: localStorage
+PWA: Web App Manifest + Service Worker
+Android Wrapper: Capacitor
