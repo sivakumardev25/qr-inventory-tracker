@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">qrtrackapp</string>
-    <string name="title_activity_main">qrtrackapp</string>
-    <string name="package_name">com.qrtrack.app</string>
-    <string name="custom_url_scheme">com.qrtrack.app</string>
-</resources>
