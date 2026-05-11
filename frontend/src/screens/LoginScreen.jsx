@@ -9,16 +9,21 @@
 // NO extra packages needed.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState } from 'react';
+import { useState } from "react";
 
-function InputField({ label, value, onChange, placeholder, type = 'text' }) {
+function InputField({ label, value, onChange, placeholder, type = "text" }) {
   const [focused, setFocused] = useState(false);
   return (
     <div>
-      <label style={{
-        fontSize: 11, color: 'var(--muted)',
-        display: 'block', marginBottom: 6, letterSpacing: '0.5px',
-      }}>
+      <label
+        style={{
+          fontSize: 11,
+          color: "var(--muted)",
+          display: "block",
+          marginBottom: 6,
+          letterSpacing: "0.5px",
+        }}
+      >
         {label}
       </label>
       <input
@@ -29,14 +34,15 @@ function InputField({ label, value, onChange, placeholder, type = 'text' }) {
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         style={{
-          width: '100%',
-          padding: '13px 16px',
+          width: "100%",
+          padding: "13px 16px",
           borderRadius: 10,
-          background: 'var(--surf2)',
-          border: `1px solid ${focused ? 'var(--acc)' : 'var(--brd)'}`,
-          color: 'var(--txt)',
+          background: "var(--surf2)",
+          border: `1px solid ${focused ? "var(--acc)" : "var(--brd)"}`,
+          color: "var(--txt)",
           fontSize: 14,
-          transition: 'border-color 0.2s',
+          outline: "none",
+          transition: "border-color 0.2s",
         }}
       />
     </div>
@@ -44,65 +50,93 @@ function InputField({ label, value, onChange, placeholder, type = 'text' }) {
 }
 
 export default function LoginScreen({ onLogin }) {
-  const [name,  setName]  = useState('');
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
+  // const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
-    if (!name.trim()) {
-      setError('Please enter your name.');
+  const handleLogin = async () => {
+    // if (!name.trim()) {
+    //   setError('Please enter your name.');
+    //   return;
+    // }
+    if (!email.includes("@") || !email.includes(".")) {
+      setError("Please enter a valid email address.");
       return;
     }
-    if (!email.includes('@') || !email.includes('.')) {
-      setError('Please enter a valid email address.');
+
+    if (password.length < 3) {
+      setError("Please enter your password.");
       return;
     }
-    setError('');
-    onLogin({ name: name.trim(), email: email.trim().toLowerCase() });
+
+    setError("");
+    setLoading(true);
+    // await onLogin({ name: name.trim(), email: email.trim().toLowerCase() });
+    await onLogin({ email: email.trim().toLowerCase(), password });
+    setLoading(false);
   };
 
   return (
-    <div style={{
-      minHeight: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 28,
-      background: `
+    <div
+      style={{
+        minHeight: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 28,
+        background: `
         radial-gradient(ellipse 80% 60% at 50% 0%,
           rgba(0,212,170,0.08) 0%, transparent 70%)
       `,
-    }}>
+      }}
+    >
       {/* Icon */}
       <div style={{ fontSize: 64, marginBottom: 16 }}>📦</div>
 
       {/* Title */}
-      <h1 style={{
-        fontFamily: "'Space Mono', monospace",
-        fontSize: 24, fontWeight: 700,
-        letterSpacing: 2, marginBottom: 8,
-      }}>
-        QR<span style={{ color: 'var(--acc)' }}>TRACK</span>
+      <h1
+        style={{
+          fontFamily: "'Space Mono', monospace",
+          fontSize: 24,
+          fontWeight: 700,
+          letterSpacing: 2,
+          marginBottom: 8,
+        }}
+      >
+        QR<span style={{ color: "var(--acc)" }}>TRACK</span>
       </h1>
-      <p style={{
-        color: 'var(--muted)', fontSize: 13,
-        marginBottom: 36, textAlign: 'center', lineHeight: 1.6,
-      }}>
+      <p
+        style={{
+          color: "var(--muted)",
+          fontSize: 13,
+          marginBottom: 36,
+          textAlign: "center",
+          lineHeight: 1.6,
+        }}
+      >
         Scan products · Build your master file · Export anytime
       </p>
 
       {/* Form */}
-      <div style={{
-        width: '100%', maxWidth: 360,
-        display: 'flex', flexDirection: 'column', gap: 16,
-      }}>
-        <InputField
+      <div
+        style={{
+          width: "100%",
+          maxWidth: 360,
+          display: "flex",
+          flexDirection: "column",
+          gap: 16,
+        }}
+      >
+        {/* <InputField
           label="Your Name"
           value={name}
           onChange={setName}
           placeholder="e.g. Ravi Kumar"
-        />
+        /> */}
+
         <InputField
           label="Email Address"
           value={email}
@@ -110,33 +144,48 @@ export default function LoginScreen({ onLogin }) {
           placeholder="ravi@company.com"
           type="email"
         />
+        <InputField
+          label="Password"
+          value={password}
+          onChange={setPassword}
+          placeholder="Enter your password"
+          type="password"
+        />
 
         {/* Error */}
         {error && (
-          <div style={{ fontSize: 12, color: 'var(--err)', textAlign: 'center' }}>
+          <div
+            style={{ fontSize: 12, color: "var(--err)", textAlign: "center" }}
+          >
             {error}
           </div>
         )}
 
         <button
           onClick={handleLogin}
+          disabled={loading}
           style={{
             marginTop: 4,
             padding: 16,
             borderRadius: 12,
-            background: 'linear-gradient(135deg, var(--acc), #00b894)',
-            color: '#0a0e1a',
+            background: loading
+              ? "var(--surf2)"
+              : "linear-gradient(135deg, var(--acc), #00b894)",
+            color: loading ? "var(--muted)" : "#0a0e1a",
             fontSize: 15,
             fontWeight: 700,
             letterSpacing: 0.5,
-            boxShadow: '0 4px 24px rgba(0,212,170,0.3)',
+               boxShadow: loading ? "none" : "0 4px 24px rgba(0,212,170,0.3)",
+            cursor: loading ? "not-allowed" : "pointer",
+            border: "none",
+            transition: "all 0.2s",
           }}
         >
-          Start Session →
+         {loading ? "Signing in..." : "Sign In →"}
         </button>
 
-        <p style={{ textAlign: 'center', fontSize: 11, color: 'var(--muted)' }}>
-          Your session is saved locally on this device.
+        <p style={{ textAlign: "center", fontSize: 11, color: "var(--muted)" }}>
+         Contact your admin to create an account.
         </p>
       </div>
     </div>

@@ -26,3 +26,6 @@ npx cap open android  // for run the code in mobile
 
 C:\Users\DELL\AppData\Local\Android\Sdk\platform-tools
 cmd : adb devices
+
+
+npm install axios
