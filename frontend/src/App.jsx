@@ -39,7 +39,7 @@ import PreviewScreen from "./screens/PreviewScreen";
 import MasterScreen from "./screens/MasterScreen";
 
 // Change this to your backend URL when you deploy ──────────────────────────
-const API_BASE = "http://localhost:5004";
+// const API_BASE = "http://localhost:5004";
 
 export default function App() {
   // ── Persistent state (loaded from localStorage on first render) ───────────
@@ -94,22 +94,21 @@ export default function App() {
   // ── AUTH ──────────────────────────────────────────────────────────────────
   // In App.jsx — replace handleLogin
   const handleLogin = async ({ email, password }) => {
-  try {
-    const res = await axios.post(`${API_BASE}/api/auth/login`, {
-      email,
-      password,
-    });
+    try {
+      const res = await axios.post(`${REACT_APP_API_URL}/api/auth/login`, {
+        email,
+        password,
+      });
 
-    localStorage.setItem("token", res.data.token);
-    setUser(res.data.user);
-    saveToStorage(STORAGE_KEYS.USER, res.data.user);
-    showToast(`Welcome, ${res.data.user.name}!`);
-
-  } catch (err) {
-    const msg = err.response?.data?.message || "Login failed";
-    showToast(msg, "error");
-  }
-};
+      localStorage.setItem("token", res.data.token);
+      setUser(res.data.user);
+      saveToStorage(STORAGE_KEYS.USER, res.data.user);
+      showToast(`Welcome, ${res.data.user.name}!`);
+    } catch (err) {
+      const msg = err.response?.data?.message || "Login failed";
+      showToast(msg, "error");
+    }
+  };
   // const handleLogin = async (email, password) => {
   //   try {
   //     const loginRes = await axios.post(`${API_BASE}/api/auth/login`, {
@@ -121,30 +120,30 @@ export default function App() {
   //       password,
   //     });
 
-      // const data = await loginRes.json();
+  // const data = await loginRes.json();
 
-      // console.log("Status:", loginRes.status);
-      // console.log("Response:", data);
+  // console.log("Status:", loginRes.status);
+  // console.log("Response:", data);
 
-      // if (!loginRes.ok) {
-      //   showToast(data.message || "Login failed", "error");
-      //   return;
-      // }
-      //Store JWT token
-      // localStorage.setItem("token", loginRes.data.token);
+  // if (!loginRes.ok) {
+  //   showToast(data.message || "Login failed", "error");
+  //   return;
+  // }
+  //Store JWT token
+  // localStorage.setItem("token", loginRes.data.token);
 
-      // setUser(loginRes.data.user); // { _id, name, email, role }
-      // saveToStorage(STORAGE_KEYS.USER, loginRes.data.user);
+  // setUser(loginRes.data.user); // { _id, name, email, role }
+  // saveToStorage(STORAGE_KEYS.USER, loginRes.data.user);
 
-      // // // Route by role
-      // // if (data.user.role === "admin") setScreen("master");
-      // // else setScreen("scan");
+  // // // Route by role
+  // // if (data.user.role === "admin") setScreen("master");
+  // // else setScreen("scan");
 
-      // showToast(`Welcome, ${loginRes.data.user.name}!`);
-      //   } catch (err) {
-      //     console.error("Login error:", err);
-      //     showToast("Connection failed", "error");
-      //   }
+  // showToast(`Welcome, ${loginRes.data.user.name}!`);
+  //   } catch (err) {
+  //     console.error("Login error:", err);
+  //     showToast("Connection failed", "error");
+  //   }
   //     // };
   //   } catch (err) {
   //     const msg =
@@ -184,7 +183,7 @@ export default function App() {
     try {
       // POST to backend
       await axios.post(
-        `${API_BASE}/api/scans`,
+        `${REACT_APP_API_URL}/api/scans`,
         {
           qrData: scannedData.qrId,
           item: scannedData.productName,
