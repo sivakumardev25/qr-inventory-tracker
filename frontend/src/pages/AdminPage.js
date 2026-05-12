@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE } from "./config";
 
 export default function AdminDashboard() {
   const [scans, setScans] = useState([]);
@@ -11,7 +12,7 @@ export default function AdminDashboard() {
   const fetchScans = async () => {
     const token = localStorage.getItem("token");
 
-    const res = await axios.get("http://localhost:5004/api/scans", {
+    const res = await axios.get(`{API_BASE}/api/scans`, {
       headers: {
         Authorization: token,
       },
