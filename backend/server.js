@@ -7,7 +7,9 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // CRA default port
+    origin: ["http://localhost:3000",
+    "https://qr-inventry-app.netlify.app", ],
+    // CRA default port
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
