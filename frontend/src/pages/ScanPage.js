@@ -4,7 +4,7 @@ const saveScan = async (qrData) => {
   const token = localStorage.getItem("token");
 
   await axios.post(
-    `${REACT_APP_API_URL}/api/scans`,
+    "http://localhost:5004/api/scans",
     {
       qrData,
       item: qrData,

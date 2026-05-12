@@ -11,7 +11,7 @@ export default function AdminDashboard() {
   const fetchScans = async () => {
     const token = localStorage.getItem("token");
 
-    const res = await axios.get(`${REACT_APP_API_URL}/api/scans`, {
+    const res = await axios.get("http://localhost:5004/api/scans", {
       headers: {
         Authorization: token,
       },
