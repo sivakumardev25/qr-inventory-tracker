@@ -14,6 +14,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useState, useEffect } from "react";
+
 import axios from "axios";
 // ── Utilities & Data ─────────────────────────────────────────────────────────
 import { GLOBAL_STYLES } from "./utils/styles";
@@ -59,6 +60,8 @@ export default function App() {
   // ── PWA install prompt ────────────────────────────────────────────────────
   const { installReady, triggerInstall } = usePWAInstall();
 
+  const API_URL = import.meta.env.REACT_APP_API_URL;
+
   // ── Persist to localStorage whenever data changes ─────────────────────────
   useEffect(() => {
     saveToStorage(STORAGE_KEYS.MASTER, masterData);
@@ -95,7 +98,7 @@ export default function App() {
   // In App.jsx — replace handleLogin
   const handleLogin = async ({ email, password }) => {
     try {
-      const res = await axios.post(`${REACT_APP_API_URL}/api/auth/login`, {
+      const res = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password,
       });
@@ -183,7 +186,7 @@ export default function App() {
     try {
       // POST to backend
       await axios.post(
-        `${REACT_APP_API_URL}/api/scans`,
+        `${API_URL}/api/scans`,
         {
           qrData: scannedData.qrId,
           item: scannedData.productName,
